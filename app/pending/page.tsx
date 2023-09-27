@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from 'react';
 import {IoSearch} from 'react-icons/io5'
 import Link from 'next/link'
+import LogoBranding from '../components/SideBar/Nav';
 
 
 type Props = {}
@@ -107,7 +108,11 @@ const page = (props: Props) => {
 
 
   return (
-    <div className="text-white overflow-hidden">
+  <div className='flex'>
+    <div>
+      <LogoBranding />
+    </div>
+      <div className="text-white overflow-hidden">
     <div className="bg-gray-900 flex h-72 py-2 px-6">
       <div className="font-bold w-full text-yellow-400">
         <div className="flex justify-between w-full mt-10">
@@ -174,6 +179,7 @@ const page = (props: Props) => {
         </table>
       </div>
     </div>
+  </div>
   </div>
   )
 }
