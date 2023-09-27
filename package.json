@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@thirdweb-dev/react": "^3.16.0",
+    "@thirdweb-dev/sdk": "^3.10.62",
     "axios": "^1.5.1",
+    "ethers": "^5.7.2",
+    "flowbite-react": "^0.6.1",
     "html2canvas": "^1.4.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.11.0",
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.16.0"
