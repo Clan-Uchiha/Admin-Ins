@@ -2,6 +2,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link'
+import LogoBranding from '@/app/components/SideBar/Nav';
 
 
 const UserVerificationForm = ({  }) => {
@@ -31,7 +32,11 @@ const UserVerificationForm = ({  }) => {
     isCertificateTypeVerified;
 
   return (
-    <div className="verification-form">
+   <div className='flex'>
+    <div>
+      <LogoBranding />
+    </div>
+     <div className="verification-form">
       <h2>User Verification</h2>
       <div className="user-details p-4 m-2 flex flex-col gap-4">
         <p>
@@ -85,6 +90,7 @@ const UserVerificationForm = ({  }) => {
         </div>
       )}
     </div>
+   </div>
   );
 };
 
