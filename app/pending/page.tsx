@@ -109,15 +109,12 @@ const page = (props: Props) => {
 
   return (
   <div className='flex'>
-    <div>
-      <LogoBranding />
-    </div>
       <div className="text-white overflow-hidden">
-    <div className="bg-gray-900 flex h-72 py-2 px-6">
+    <div className="">
       <div className="font-bold w-full text-yellow-400">
         <div className="flex justify-between w-full mt-10">
           <h1 className="text-4xl mx-10 font-bold text-yellow-400">
-            Student List
+            Pending Verification List
           </h1>
           <div className="mx-16 flex gap-0">
             <div>
@@ -138,28 +135,28 @@ const page = (props: Props) => {
       </div>
     </div>
 
-    <div className="border-blue-900 rounded-xl">
+    <div className="border-blue-900 rounded-xl my-4">
       <div className="">
-        <table className="mt-10 mx-10 text-black absolute bg-white top-36 -left-2 rounded-md w-[88rem] shadow border pr-10 mr-32">
-          <thead className="rounded-md text-align-baseline">
-            <tr className="">
-              <th className="px-6 py-3 bg-gray-100 text-gray-700 text-left">
+        <table className="mt-10 mx-10 text-black w-[90%] bg-[#898989]/80 top-36 -left-2 rounded-3xl pr-10 mr-32">
+          <thead className="rounded-md text-align-baseline ">
+            <tr className="text-white">
+              <th className="px-6 py-3  text-left">
                 Registration Number
               </th>
-              <th className="px-6 py-3 bg-gray-100 text-gray-700 text-left">
+              <th className="px-6 py-3 text-left">
                 Name
               </th>
-              <th className="px-6 py-3 bg-gray-100 text-gray-700 text-left">
+              <th className="px-6 py-3  text-left">
                 Unique Id with Institution
               </th>
-              <th className="px-6 py-3 bg-gray-100 text-gray-700 text-left">
+              <th className="px-6 py-3  text-left">
                 Certificate Type
               </th>
             </tr>
           </thead>
           <tbody>
             {filteredStudents.map((student) => (
-              <tr key={student.id} className="border-t border-gray-200">
+              <tr key={student.id} className="border-t text-slate-50 border-gray-200 hover:scale-105 transition-all hover:bg-white hover:text-black hover:rounded-full hover:cursor-pointer">
                 <td className="px-6 py-4">{student.registrationNumber}</td>
                 <td className="px-6 py-4">{student.name}</td>
                 <td className="px-6 py-4">{student.mobileNumber}</td>
