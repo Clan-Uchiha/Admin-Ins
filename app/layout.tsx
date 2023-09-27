@@ -29,7 +29,7 @@ export default function RootLayout({
             <div className='border-r-[.7px] border-slate-300/20 h-[100vh] p-6 w-[20%]'>
               <Nav />
             </div>
-            <div>
+            <div className='w-full'>
             {children}
             </div>
           </body>

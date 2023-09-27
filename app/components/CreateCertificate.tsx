@@ -30,8 +30,8 @@ const CreateCertificate = () => {
           {/* <label htmlFor="input1">Input 1</label> */}
           <input
             type="text"
-            // id="input1"
-            // name="input1"
+            id="input1"
+            name="input1"
             value={studentName}
             onChange={(e)=>{setStudentName(e.target.value)}}
             className="border p-2"
