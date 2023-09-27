@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.2",
+    "flowbite-react": "^0.6.1",
+    "framer-motion": "^10.16.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

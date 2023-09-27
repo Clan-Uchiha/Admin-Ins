@@ -1,81 +1,46 @@
-import React from 'react'
-import {GrAppsRounded} from 'react-icons/gr'
-import {CiSearch} from 'react-icons/ci'
-import { MdPendingActions } from 'react-icons/md'
-import {VscNewFile} from 'react-icons/vsc'
-import {BiSolidMessageRoundedDots} from 'react-icons/bi'
-import {FiSettings} from 'react-icons/fi'
+'use client';
+import { Sidebar } from 'flowbite-react';
+import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
 
- 
-type Props = {}
-
-const Nav = (props: Props) => {
-    const navlist = [
-        {
-            name : 'Home',
-            logo : <GrAppsRounded/>
-        },
-        {
-            name : 'Discover',
-            logo : <CiSearch/>
-        },
-        {
-            name : 'Pending Requests',
-            logo : <MdPendingActions/>
-        },
-        {
-            name : 'Generate New Certificate',
-            logo : <VscNewFile/>
-        },
-        {
-            name : 'Messages',
-            logo : <BiSolidMessageRoundedDots/>
-        },
-        {
-            name : 'Settings',
-            logo : <FiSettings/>
-        }
-    ]
+export default function LogoBranding() {
   return (
-    <div className='border-r-2 w-[20vw] h-[100vh] flex flex-col justify-between'>
-        <div>
-            <h1 className='text-gray-900 p-8 font-bold text-xl'>D!Validate</h1>
-        </div>
-        <div className='p-8'>
-            <div className='border rounded-xl p-6 bg-slate-200/10 shadow '>
-            {
-                navlist.map((item, index) => {
-                    return (
-                        <div className='flex gap-2'>
-                            <div className='flex gap-3 place-items-center'>
-                                <div className=' '>
-                                    {item.logo}
-                                </div>
-                                <div className=''>
-                                    {item.name}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })
-            }
-            </div>
-        </div>
-  <div className='p-8'>
-  <div className='border bg-slate-200/50 rounded-xl  flex place-items-center'>
-            <div className=''>
-                <img 
-                className='w-20 h-20 object-cover p-3'
-                src="https://e1.pxfuel.com/desktop-wallpaper/502/361/desktop-wallpaper-rengoku-smile-rengoku-death.jpg" alt='profile' />
-            </div>
-            <div>
-                <h1>Rengoku Kyojirou</h1>
-                <h2>@Admin</h2>
-            </div>
-        </div>
-  </div>
-    </div>
-  )
+    <Sidebar >
+      <Sidebar.Logo>
+        <p className='text-white'>
+          Dvalidate
+        </p>
+      </Sidebar.Logo>
+      <Sidebar.Items className='mt-10'>
+        <Sidebar.ItemGroup 
+        className='text-[#898989] border-none  '>
+          <Sidebar.Item href="#" icon={HiChartPie} className="hover:bg-red-200 mb-5 
+        transition-all px-5 py-3 flex  text-xl bg-[#6f6f6f] gap-2 text-white ">
+            Home
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiViewBoards} className="hover:bg-[#898989]
+          hover:text-white
+           px-5 py-3 flex  mb-5 gap-2  text-xl">
+            Pending 
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiInbox} className="hover:bg-[#898989] gap-2  hover:text-white px-5 py-3 flex  mb-5  text-xl">
+            Generate New
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiUser} className="hover:bg-[#898989] gap-2  hover:text-white px-5 py-3 flex  mb-5  text-xl">
+            Inbox
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiShoppingBag} className="hover:bg-[#898989] gap-2  hover:text-white px-5 py-3 mb-5  flex  text-xl">
+           Settings
+          </Sidebar.Item>
+        </Sidebar.ItemGroup>
+        {/* <Sidebar.ItemGroup className='border-none text-[#898989]'>
+          <Sidebar.Item href="#" icon={HiArrowSmRight} >
+            Sign In
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiTable}>
+            Sign Up
+          </Sidebar.Item>
+        </Sidebar.ItemGroup> */}
+      </Sidebar.Items>
+    </Sidebar>
+  );
 }
-
-export default Nav
