@@ -6,18 +6,26 @@ import { SiEthereum } from "react-icons/si";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
 import { useDropzone } from "react-dropzone";
+import { useStateContext } from '../../context/StateContext';
+import axios from "axios";
+
 
 const CertificateGenerator = () => {
+  const { generateCertificate } = useStateContext();
   const user = {
     name: "BALA SHIVA",
     gender: "MALE",
+    email: "mail@mail.com",
     dob: "JUNE 12, 2003",
     id: "6906-0531-5541",
+    title: "this is it",
+    description: "this is the sample description"
   };
 
   const [isGenerated, setIsGenerated] = useState(false);
   const certificateRef = useRef(null);
   const [uris, setUris] = useState<string[]>([]);
+  const [blockHash, setBlockHash] = useState('');
 
   const { mutateAsync: upload } = useStorageUpload();
 
@@ -25,18 +33,11 @@ const CertificateGenerator = () => {
     try {
       setIsGenerated(true);
 
-      // Capture the certificate component as an image
       const canvas = await html2canvas(certificateRef.current);
-
-      // Create a data URL from the canvas
       const dataURL = await canvas.toDataURL("image/png");
-
-      // Create a download link
       const link = document.createElement("a");
       link.href = dataURL;
       link.download = "certificate.png";
-
-      // Trigger the download
       link.click();
     } catch (error) {
       console.error("Error generating certificate:", error);
@@ -53,8 +54,37 @@ const CertificateGenerator = () => {
   );
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await generateCertificate({
+      _studentName: user.name,
+      _title: user.title,
+      _description: user.description,
+      _image: uris[0]
+    }).then((response) => {
+      // Store the response blockHash in the state
+      // setBlockHash(response.receipt.blockHash);
+      // console.log(blockHash)
+      console.log(response);
+      console.log(response["receipt"]);
+      // Rest of your code...
+    })
+    // console.log(response)
+
+    // console.log(formData);
+    await axios.post("http://localhost:3002/api/certs", {
+      certificate: uris[0],
+      hash: "asdfvasfv",
+      uuid: `Dval-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: user.name,
+      dob: user.email,
+      titlecert: user.title,
+
+    })
+  };
+
   return (
-<div className="certificate-generator p-4 rounded-lg bg-gray-100 h-screen">
+    <div className="certificate-generator p-4 rounded-lg bg-gray-100 h-screen">
       <h2 className="text-4xl font-semibold text-center mb-6">
         Certificate Generator
       </h2>
@@ -106,6 +136,12 @@ const CertificateGenerator = () => {
           onClick={handleGenerateCertificate}
         >
           Generate Certificate
+        </button>
+        <button
+          className="text-white bg-green-500 font-bold rounded-full shadow-lg hover:shadow-sm px-10 py-4"
+          onClick={handleSubmit}
+        >
+          Upload to Blockchain
         </button>
       </div>
       <div {...getRootProps()} className="border p-3 justify-center flex items-center border-dashed mt-3">
