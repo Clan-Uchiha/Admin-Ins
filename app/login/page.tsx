@@ -1,122 +1,75 @@
-"use client"
-import { object, string, TypeOf } from "zod";
-import { useEffect } from "react";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import FormInput from "../components/FormInput";
-import { LoadingButton } from "../components/LoadingButton";
-import { toast } from "react-toastify";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import useStore from "../../store/index";
-import { authApi } from "../api/authApi";
-import { ILoginResponse } from "../api/types";
+import React from 'react';
 
-const loginSchema = object({
-  email: string()
-    .min(1, "Email address is required")
-    .email("Email Address is invalid"),
-  password: string()
-    .min(1, "Password is required")
-    .min(8, "Password must be more than 8 characters")
-    .max(32, "Password must be less than 32 characters"),
-});
-
-export type LoginInput = TypeOf<typeof loginSchema>;
-
-const LoginPage = () => {
-  // const navigate = useNavigate();
-  const location = useLocation();
-
-  const methods = useForm<LoginInput>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const store = useStore();
-
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitSuccessful },
-  } = methods;
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSubmitSuccessful]);
-
-  const loginUser = async (data: LoginInput) => {
-    try {
-      store.setRequestLoading(true);
-      const {
-        data: { user },
-      } = await authApi.post<ILoginResponse>("/auth/login", data);
-      store.setRequestLoading(false);
-      store.setAuthUser(user);
-      if (user.otp_enabled) {
-        // navigate("/login/validateOtp");
-      } else {
-        // navigate("/profile");
-      }
-    } catch (error: any) {
-      store.setRequestLoading(false);
-      const resMessage =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.response.data.detail ||
-        error.message ||
-        error.toString();
-      toast.error(resMessage, {
-        position: "top-right",
-      });
-    }
-  };
-
-  const onSubmitHandler: SubmitHandler<LoginInput> = (values) => {
-    loginUser(values);
-  };
-
+const LoginCard = () => {
   return (
-    <section className="bg-ct-blue-600 min-h-screen grid place-items-center">
-      <div className="w-full">
-        <h1 className="text-4xl lg:text-6xl text-center font-[600] text-ct-yellow-600 mb-4">
-          Welcome Back
-        </h1>
-        <h2 className="text-lg text-center mb-4 text-ct-dark-200">
-          Login to have access
-        </h2>
-        <FormProvider {...methods}>
-          <form
-            onSubmit={handleSubmit(onSubmitHandler)}
-            className="max-w-md w-full mx-auto overflow-hidden shadow-lg bg-ct-dark-200 rounded-2xl p-8 space-y-5"
-          >
-            <FormInput label="Email" name="email" type="email" />
-            <FormInput label="Password" name="password" type="password" />
+    <div className="flex w-full h-[100vh] p-10   overflow-hidden bg-white shadow-2xl dark:bg-gray-800 ">
+      <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80')" }}></div>
 
-            <div className="text-right">
-              <Link to="/forgotpassword" className="">
-                Forgot Password?
-              </Link>
-            </div>
-            <LoadingButton
-              loading={store.requestLoading}
-              textColor="text-ct-blue-600"
-            >
-              Login
-            </LoadingButton>
-            <span className="block">
-              Need an account?{" "}
-              <Link to="/register" className="text-ct-blue-600">
-                Sign Up Here
-              </Link>
-            </span>
-          </form>
-        </FormProvider>
+      <div className="w-full my-28 px-6 py-8 md:px-8 lg:w-1/2">
+        <div className="flex justify-center mx-auto">
+          <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+        </div>
+
+        <p className="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
+          Welcome back!
+        </p>
+
+        <a href="#" className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <div className="px-4 py-2">
+            <svg className="w-6 h-6" viewBox="0 0 40 40">
+              {/* Your SVG paths here */}
+            </svg>
+          </div>
+
+          <span className="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
+        </a>
+
+        <div className="flex items-center justify-between mt-4">
+          <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+
+          <a href="#" className="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline">or login with email</a>
+
+          <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+        </div>
+
+        <div className="mt-4">
+          <label htmlFor="LoggingEmailAddress" className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">Email Address</label>
+          <input
+            id="LoggingEmailAddress"
+            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+            type="email"
+          />
+        </div>
+
+        <div className="mt-4">
+          <div className="flex justify-between">
+            <label htmlFor="loggingPassword" className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">Password</label>
+            <a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget Password?</a>
+          </div>
+
+          <input
+            id="loggingPassword"
+            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+            type="password"
+          />
+        </div>
+
+        <div className="mt-6">
+          <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+            Sign In
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between mt-4">
+          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+
+          <a href="#" className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or sign up</a>
+
+          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default LoginPage;
+export default LoginCard;

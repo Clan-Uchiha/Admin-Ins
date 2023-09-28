@@ -26,9 +26,9 @@ export default function RootLayout({
       >
         <StateContextProvider>
           <body className={`${inter.className} flex`}>
-            <div className='border-r-[.7px] bg-gray-50 border-slate-300/20 h-[100vh] p-6 w-[30%]'>
-              <Nav />
-            </div>
+        {
+          location.pathname !== '/login' && <Nav />
+        }
             <div className='w-full'>
             {children}
             </div>
