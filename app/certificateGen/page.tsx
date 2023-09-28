@@ -65,14 +65,14 @@ const CertificateGenerator = () => {
       // Store the response blockHash in the state
       // setBlockHash(response.receipt.blockHash);
       // console.log(blockHash)
-      console.log(response);
-      console.log(response["receipt"]);
+      // console.log(response);
+      // console.log(response["receipt"]);
       // Rest of your code...
     })
     // console.log(response)
 
     // console.log(formData);
-    await axios.post("http://localhost:3002/api/certs", {
+    await axios.post("https://uchiaback.onrender.com/api/certs", {
       certificate: uris[0],
       hash: "asdfvasfv",
       uuid: `Dval-${Math.floor(1000 + Math.random() * 9000)}`,

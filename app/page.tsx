@@ -15,6 +15,10 @@ const Page: React.FC<Props> = (props: Props) => {
     <div className='flex  '>
       <div className='w-full'>
         <Search />
+        <div className='bg-gradient-to-l from-amber-200 to-yellow-500 w-60% h-[10rem] rounded-xl w-[10rem]'>
+          <h1>asdvcasdv</h1>
+          <img src="https://www.pngall.com/wp-content/uploads/10/Ethereum-Logo-PNG-File.png"/>
+        </div>
         <div className='flex gap-10 p-2 mx-10'>
           <GlassmorphismCard />
           <GlassmorphismCard />

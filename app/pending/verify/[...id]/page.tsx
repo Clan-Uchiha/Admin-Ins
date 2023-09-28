@@ -95,7 +95,7 @@ const UserVerificationForm = ({ }) => {
           )}
         </div>
         <div>
-          <CreateCertificate />
+          {/* <CreateCertificate /> */}
         </div>
       </div>
 
